@@ -20,7 +20,7 @@ class slider extends Seeder
             ['link'=>'banner2.com','image'=>'banner2.jpg'],
             ['link'=>'banner3.com','image'=>'banner3.jpg'],
             ['link'=>'banner4.com','image'=>'banner4.jpg'],
-            
+
         ];
         foreach($slider as $sl){
             DB::table('slider')->insert($sl);
