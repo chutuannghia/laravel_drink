@@ -11,29 +11,46 @@ class frontendControllers extends Controller
 {
     //trangchu
     public function TrangChu(){
-        $product = Product::take(8)->get();
-        $type = Type_Product::all();
+        $sonew = count(Product::where('properties',1)->get('id'));
+        $sotop = count(Product::where('properties',2)->get('id'));
+        $sosale = count(Product::where('promotion_price','>=',0)->get('id'));
+        $sale = Product::where('promotion_price','>=',0)->paginate(6);
+        $hot = Product::where('properties',2)->paginate(6);
         $slider = Slider::get('image');
-        $new = Product::where('new',1)->take(4)->get();
-        return view('welcome',compact('product','slider','type','new'));
+        $new = Product::where('properties',1)->paginate(6);
+        return view('welcome',compact('hot','slider','new','sonew','sotop','sale','sosale'));
 
     }
     //san pham
-    public function SanPham(){
-        $product = Product::take(8)->get();
-        $new = Product::where('new',1)->take(4)->get();
-        $type = Type_Product::all();
+    public function SanPham($id){
+        $product = Product::where('id',$id)->get();
+        $new = Product::where('properties',1)->take(4)->get();
+        $top = Product::where('properties',2)->take(4)->get();
+        $tt =  Product::where('id_type',$product[0]['id_type'])->paginate(3);
         $slider = Slider::get('image');
-        return view('product',compact('product','type','slider','new'));
+        return view('product',compact('product','slider','new','tt','top'));
     }
-    //san pham chi tiet
-    public function LoaiSanPham(){
-        $product = Product::take(3)->get();
+    //loai san pham
+    public function LoaiSanPhamid($id){
+        $sonew = count(Product::where('properties',1)->where('id_type',$id)->get('id'));
+        $sotop = count(Product::where('properties',2)->where('id_type',$id)->get('id'));
+        $hot =  Product::where('properties',2)->where('id_type',$id)->paginate(3);
+        $type1 = Type_Product::paginate(10);
         $product1 = Product::paginate(15);
-        $new = Product::where('new',1)->take(3)->get();
-        $type = Type_Product::all();
+        $new = Product::where('properties',1)->where('id_type',$id)->paginate(3);
         $slider = Slider::get('image');
-        return view('producttype',compact('product','type','slider','new','product1'));
+        return view('producttype',compact('hot','slider','new','product1','sonew','sotop','type1'));
+    }
+
+    public function LoaiSanPham(){
+        $sonew = count(Product::where('properties',1)->get('id'));
+        $sotop = count(Product::where('properties',2)->get('id'));
+        $hot =  Product::where('properties',2)->paginate(3);
+        $product1 = Product::paginate(15);
+        $new = Product::where('properties',1)->paginate(3);
+        $slider = Slider::get('image');
+        $type1 = Type_Product::paginate(10);
+        return view('producttype',compact('hot','slider','new','product1','sonew','sotop','type1'));
     }
     //gioi thieu
     public function GioiThieu(){

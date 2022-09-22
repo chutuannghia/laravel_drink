@@ -4,7 +4,7 @@
             <div class="pull-left auto-width-left">
                 <ul class="top-menu menu-beta l-inline">
                     <li><a href=""><i class="fa fa-home"></i> 90-92 Lê Thị Riêng, Bến Thành, Quận 1</a></li>
-                    <li><a href=""><i class="fa fa-phone"></i> 0163 296 7751</a></li>
+                    <li><a href=""><i class="fa fa-phone"></i> 0968063216</a></li>
                 </ul>
             </div>
             <div class="pull-right auto-width-right">
@@ -20,7 +20,7 @@
     <div class="header-body">
         <div class="container beta-relative">
             <div class="pull-left">
-                <a href="index.html" id="logo"><img src="./resources/source/assets/dest/images/logo-cake.png" width="200px" alt=""></a>
+                <a href="{{route('trangchu')}}" id="logo"><img src="./resources/image/logo1.png" width="200px" alt=""></a>
             </div>
             <div class="pull-right beta-components space-left ov">
                 <div class="space10">&nbsp;</div>
@@ -94,7 +94,7 @@
                     <li><a href="{{route('loaisanpham')}}">Loại Sản phẩm</a>
                         <ul class="sub-menu">
                             @foreach ($type as $item)
-                            <li><a href="{{route('sanpham',$item->id)}}">{{$item->name}}</a></li>
+                            <li><a href="{{route('lspid',$item->id)}}">{{$item->name}}</a></li>
                             @endforeach
                         </ul>
                     </li>

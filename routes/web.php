@@ -17,6 +17,7 @@ use App\Http\Controllers\frontendControllers;
 Route::get('',[frontendControllers::class,'TrangChu'])->name('trangchu');
 Route::get('sanpham/{id}',[frontendControllers::class,'SanPham'])->name('sanpham');
 Route::get('loaisanpham',[frontendControllers::class,'LoaiSanPham'])->name('loaisanpham');
+Route::get('loaisanpham/{id}',[frontendControllers::class,'LoaiSanPhamid'])->name('lspid');
 Route::get('lienhe',[frontendControllers::class,'LienHe'])->name('lienhe');
 Route::get('gioithieu',[frontendControllers::class,'GioiThieu'])->name('gioithieu');
 

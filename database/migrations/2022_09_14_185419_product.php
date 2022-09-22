@@ -23,7 +23,7 @@ return new class extends Migration
                 $table->float('promotion_price');
                 $table->string('image',225);
                 $table->string('unit',255);
-                $table->integer('new');
+                $table->integer('properties');
             });
         }
     }
