@@ -1,5 +1,10 @@
 @extends('layout.master')
+@section('title','Sản phẩm')
 @section('content')
+<div class="rev-slider">
+    @include('layout.slider')
+                <!--slider-->
+</div>
 <div class="inner-header">
     <div class="container">
         <div class="pull-left">
@@ -7,7 +12,7 @@
         </div>
         <div class="pull-right">
             <div class="beta-breadcrumb font-large">
-                <a href="index.html">Trang chủ</a> / <span>Sản phẩm</span>
+                <a href="{{route('trangchu')}}">Trang chủ</a> / <span>Sản phẩm</span>
             </div>
         </div>
         <div class="clearfix"></div>
@@ -21,11 +26,11 @@
 
                 <div class="row">
                     <div class="col-sm-4">
-                        <img src="./resources/image/{{$product[0]['image']}}" alt="{{$product[0]['name']}}">
+                        <img src="./resources/image/{{$product[0]['image']?$product[0]['image']:'stock.png'}}" alt="{{$product[0]['name']}}">
                     </div>
                     <div class="col-sm-8">
                         <div class="single-item-body">
-                            <p class="single-item-title h2" style="color:orangered;font-weight:bold;font-size:20px">{{$product[0]['name']}}</p>
+                            <p class="single-item-title h2" style="color:orangered;font-weight:bold;font-size:18px">{{$product[0]['name']}}</p>
                             <p class="single-item-price" style="color:rgb(0, 255, 34);font-weight:bold;font-size:16px">
                                 @if ($product[0]['promotion_price'] != null)
                                 <span>{{$product[0]['promotion_price']}} đ</span>
@@ -45,21 +50,19 @@
 
                         <p>Lựa chọn:</p>
                         <div class="single-item-options">
-                            <select class="wc-select" name="soluong">
-                                <option>Số lượng</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
+                            <select class="wc-select" name="loai">
+                                <option value="{{$product[0]['unit']}}" selected>{{$product[0]['unit']}}</option>
+                                @if ($product[0]['unit'] != 'thùng')
+                                <option value="thung">Thùng</option>
+                                @endif
                             </select>
-                            <a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i></a>
+                            <a class="add-to-cart" href="{{route('addtocart',$product[0]['id'])}}"><i class="fa fa-shopping-cart"></i></a>
                             <div class="clearfix"></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="space40">&nbsp;</div>
+                <div class="space20">&nbsp;</div>
                 <div class="woocommerce-tabs">
                     <ul class="tabs">
                         <li><a href="#tab-description">Mô tả</a></li>
@@ -73,7 +76,7 @@
                         <p>Chưa được đánh giá</p>
                     </div>
                 </div>
-                <div class="space50">&nbsp;</div>
+                <div class="space20">&nbsp;</div>
                 <div class="beta-products-list">
                     <h4>Sản phẩm tương tự</h4>
 
@@ -82,7 +85,7 @@
                         <div class="col-sm-3">
                             <div class="single-item">
                                 <div class="single-item-header">
-                                    <a href="{{route('sanpham',$t->id)}}"><img src="./resources/image/{{$t->image}}" class="image-fluid" height="180" alt="{{$t->name}}"></a>
+                                    <a href="{{route('sanpham',$t->id)}}"><img src="./resources/image/{{$t->image?$t->image:'stock.png'}}" class="image-fluid" height="180" alt="{{$t->name}}"></a>
                                 </div>
                                 <div class="single-item-body">
                                     <p class="single-item-title"><span style="font-size:20px;font-weight:bold;color:{{route('sanpham',$t->id)}}FE9A2E">{{$t->name}}</span></p>
@@ -111,7 +114,7 @@
                         <div class="beta-sales beta-lists">
                             @foreach ($top as $ht)
                             <div class="media beta-sales-item">
-                                <a class="pull-left" href="{{route('sanpham',$ht->id)}}"><img src="./resources/image/{{$ht->image}}" alt="{{$ht->name}}"></a>
+                                <a class="pull-left" href="{{route('sanpham',$ht->id)}}"><img src="./resources/image/{{$ht->image?$ht->image:'stock.png'}}" alt="{{$ht->name}}"></a>
                                 <div class="media-body">
                                     {{$ht->name}} <br>
                                     <span class="beta-sales-price">
@@ -129,20 +132,20 @@
                     </div>
                 </div> <!-- best sellers widget -->
                 <div class="widget">
-                    <h3 class="widget-title">Sản phẩm mới</h3>
+                    <h3 class="widget-title">Sản phẩm bán chạy</h3>
                     <div class="widget-body">
-                        @foreach ($new as $item)
+                        @foreach ($hot as $item)
                         <div class="beta-sales beta-lists">
                             <div class="media beta-sales-item">
-                                <a class="pull-left" href="{{route('sanpham',$item->id)}}"><img src="./resources/image/{{$item->image}}" alt="{{$item->name}}"></a>
+                                <a class="pull-left" href="{{route('sanpham',$item->Product->id)}}"><img src="./resources/image/{{$item->Product->image?$item->Product->image:'stock.png'}}" alt="{{$item->Product->name}}"></a>
                                 <div class="media-body">
-                                    {{$item->name}} <br>
+                                    {{$item->Product->name}} <br>
                                     <span class="beta-sales-price">
-                                        @if ($item->promotion_price == null)
-                                        <span class="font-bold text-danger">{{number_format($item->unit_price)}}</span> đ
+                                        @if ($item->Product->promotion_price == null)
+                                        <span class="font-bold text-danger">{{number_format($item->Product->unit_price)}}</span> đ
                                         @else
-                                        <span class="flash-del">{{number_format($item->unit_price)}} đ</span> <br>
-                                        <span class="flash-sale" style="color:chartreuse;">{{number_format($item->promotion_price)}} đ</span>
+                                        <span class="flash-del">{{number_format($item->Product->unit_price)}} đ</span> <br>
+                                        <span class="flash-sale" style="color:chartreuse;">{{number_format($item->Product->promotion_price)}} đ</span>
                                         @endif
                                     </span>
                                 </div>
@@ -155,4 +158,36 @@
         </div>
     </div> <!-- #content -->
 </div> <!-- .container -->
+@endsection
+@section('script')
+<script>
+    jQuery(document).ready(function($) {
+               'use strict';
+
+// color box
+
+//color
+     jQuery('#style-selector').animate({
+     left: '-213px'
+   });
+
+   jQuery('#style-selector a.close').click(function(e){
+     e.preventDefault();
+     var div = jQuery('#style-selector');
+     if (div.css('left') === '-213px') {
+       jQuery('#style-selector').animate({
+         left: '0'
+       });
+       jQuery(this).removeClass('icon-angle-left');
+       jQuery(this).addClass('icon-angle-right');
+     } else {
+       jQuery('#style-selector').animate({
+         left: '-213px'
+       });
+       jQuery(this).removeClass('icon-angle-right');
+       jQuery(this).addClass('icon-angle-left');
+     }
+   });
+               });
+   </script>
 @endsection

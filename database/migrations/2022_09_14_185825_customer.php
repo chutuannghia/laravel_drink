@@ -19,7 +19,7 @@ return new class extends Migration
                 $table->string('name',100);
                 $table->string('gender',10);
                 $table->string('email',50);
-                $table->string('adress',100);
+                $table->string('address',100);
                 $table->string('phone_number',20);
                 $table->string('note',200);
             });

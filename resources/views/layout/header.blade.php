@@ -1,17 +1,21 @@
-<div id="header">
+<div id="header" style="font-size:18px;font-weight:500">
     <div class="header-top">
         <div class="container">
             <div class="pull-left auto-width-left">
                 <ul class="top-menu menu-beta l-inline">
-                    <li><a href=""><i class="fa fa-home"></i> 90-92 Lê Thị Riêng, Bến Thành, Quận 1</a></li>
-                    <li><a href=""><i class="fa fa-phone"></i> 0968063216</a></li>
+                    <li><a href="{{route('trangchu')}}" style="color:#DF3A01"><i class="fa fa-home"></i> 90-92 Lê Thị Riêng, Bến Thành, Quận 1</a></li>
+                    <li><a href="{{route('trangchu')}}" style="color:#DF3A01"><i class="fa fa-phone"></i> 0968063216</a></li>
                 </ul>
             </div>
             <div class="pull-right auto-width-right">
-                <ul class="top-details menu-beta l-inline">
-                    <li><a href="#"><i class="fa fa-user"></i>Tài khoản</a></li>
-                    <li><a href="#">Đăng kí</a></li>
-                    <li><a href="#">Đăng nhập</a></li>
+                <ul class="top-details menu-beta l-inline" >
+                    @if (Auth::check())
+                    <li><a href="{{route('trangchu')}}" style="color:green"><i class="fa fa-user"></i>{{Auth::user()->name}}</a></li>
+                    <li><a href="{{route('logout')}}" style="color:#DF3A01">Đăng xuất</a></li>
+                    @else
+                    <li><a href="{{route('login')}}" >Đăng nhập</a></li>
+                    <li><a href="{{route('register')}}">Đăng ký</a></li>
+                    @endif
                 </ul>
             </div>
             <div class="clearfix"></div>
@@ -20,64 +24,63 @@
     <div class="header-body">
         <div class="container beta-relative">
             <div class="pull-left">
-                <a href="{{route('trangchu')}}" id="logo"><img src="./resources/image/logo1.png" width="200px" alt=""></a>
+                <a href="{{route('trangchu')}}" id="logo"><img src="./resources/image/logo2.png" width="200px" style="border-radius:16px" alt=""></a>
             </div>
             <div class="pull-right beta-components space-left ov">
                 <div class="space10">&nbsp;</div>
                 <div class="beta-comp">
-                    <form role="search" method="get" id="searchform" action="/">
-                        <input type="text" value="" name="s" id="s" placeholder="Nhập từ khóa..." />
+                    <form role="search" method="get" id="searchform" action="{{route('search')}}">
+                        @csrf
+                        <input type="text" value="" name="key" id="key" placeholder="Nhập từ khóa..." />
                         <button class="fa fa-search" type="submit" id="searchsubmit"></button>
                     </form>
                 </div>
 
                 <div class="beta-comp">
                     <div class="cart">
-                        <div class="beta-select"><i class="fa fa-shopping-cart"></i> Giỏ hàng (Trống) <i class="fa fa-chevron-down"></i></div>
-                        <div class="beta-dropdown cart-body">
-                            <div class="cart-item">
-                                <div class="media">
-                                    <a class="pull-left" href="#"><img src="./resources/source/assets/dest/images/products/cart/1.png" alt=""></a>
-                                    <div class="media-body">
-                                        <span class="cart-item-title">Sample Woman Top</span>
-                                        <span class="cart-item-options">Size: XS; Colar: Navy</span>
-                                        <span class="cart-item-amount">1*<span>$49.50</span></span>
+                        <div class="beta-select"><i class="fa fa-shopping-cart">
+                            </i> Giỏ hàng (
+                                @if (Session::has('cart'))
+                                {{Session('cart')->totalQty}}
+                                @else
+                                Trống
+                                @endif
+                                ) <i class="fa fa-chevron-down"></i>
+                        </div>
+                        <div class="beta-dropdown cart-body" style="font-size:16px">
+                            @if (Session::has('cart'))
+                                @foreach($product_cart as $pc)
+                                <div class="cart-item">
+                                    <div class="pull-right">
+                                        <a href="{{route('removetocart',$pc['item']['id'])}}"><i class="fa fa-times"></i></a>
+                                        <a href="{{route('addtocart',$pc['item']['id'])}}"><i class="fa fa-plus"></i></a>
+                                    </div>
+                                    <div class="media">
+                                        <a class="pull-left" href="#"><img src="./resources/image/{{$pc['item']['image']}}" alt=" hình ảnh sản phẩm"></a>
+                                        <div class="media-body">
+                                            <span class="cart-item-title">{{$pc['item']['name']}}</span>
+                                            <span class="cart-item-amount">{{$pc['qty']}} *
+                                                @if ($pc['item']['promotion_price'] == null)
+                                                    {{number_format($pc['item']['unit_price'])}}
+                                                @else
+                                                {{number_format($pc['item']['promotion_price'])}}
+                                                @endif
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="cart-item">
-                                <div class="media">
-                                    <a class="pull-left" href="#"><img src="./resources/source/assets/dest/images/products/cart/2.png" alt=""></a>
-                                    <div class="media-body">
-                                        <span class="cart-item-title">Sample Woman Top</span>
-                                        <span class="cart-item-options">Size: XS; Colar: Navy</span>
-                                        <span class="cart-item-amount">1*<span>$49.50</span></span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="cart-item">
-                                <div class="media">
-                                    <a class="pull-left" href="#"><img src="./resources/source/assets/dest/images/products/cart/3.png" alt=""></a>
-                                    <div class="media-body">
-                                        <span class="cart-item-title">Sample Woman Top</span>
-                                        <span class="cart-item-options">Size: XS; Colar: Navy</span>
-                                        <span class="cart-item-amount">1*<span>$49.50</span></span>
-                                    </div>
-                                </div>
-                            </div>
-
+                                @endforeach
                             <div class="cart-caption">
-                                <div class="cart-total text-right">Tổng tiền: <span class="cart-total-value">$34.55</span></div>
+                                <div class="cart-total text-right">Tổng tiền: <span class="cart-total-value">{{number_format(Session('cart')->totalPrice)}}</span></div>
                                 <div class="clearfix"></div>
 
                                 <div class="center">
                                     <div class="space10">&nbsp;</div>
-                                    <a href="checkout.html" class="beta-btn primary text-center">Đặt hàng <i class="fa fa-chevron-right"></i></a>
+                                    <a href="{{route('order')}}" class="beta-btn primary text-center">Đặt hàng <i class="fa fa-chevron-right"></i></a>
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div> <!-- .cart -->
                 </div>
             </div>

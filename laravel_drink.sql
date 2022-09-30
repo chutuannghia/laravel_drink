@@ -48,13 +48,13 @@ CREATE TABLE IF NOT EXISTS `bill_detail` (
 -- Dumping data for table laravel_drink.bill_detail: ~7 rows (approximately)
 /*!40000 ALTER TABLE `bill_detail` DISABLE KEYS */;
 INSERT INTO `bill_detail` (`id`, `id_bill`, `id_product`, `quantity`, `unit_price`) VALUES
-	(1, 1, 1, 1, 15000),
-	(2, 1, 2, 3, 30000),
-	(3, 1, 1, 1, 20000),
-	(4, 2, 2, 3, 10000),
-	(5, 2, 1, 3, 40000),
+	(1, 1, 6, 1, 15000),
+	(2, 1, 5, 2, 30000),
+	(3, 1, 3, 7, 20000),
+	(4, 2, 4, 3, 10000),
+	(5, 2, 1, 5, 40000),
 	(6, 3, 2, 3, 30000),
-	(7, 3, 2, 3, 45000);
+	(7, 3, 2, 4, 45000);
 /*!40000 ALTER TABLE `bill_detail` ENABLE KEYS */;
 
 -- Dumping structure for table laravel_drink.customer
@@ -134,7 +134,7 @@ INSERT INTO `products` (`id`, `name`, `id_type`, `description`, `unit_price`, `p
 	(31, 'Sữa tươi vinamil', 5, 'vinamil', 8000.00, NULL, 'vinamil.jpg', 'bịch', 0),
 	(32, 'Sữa tươi vinamil dâu', 5, 'vinamil', 8000.00, NULL, 'vinamildau.jpg', 'bịch', 0),
 	(33, 'Sữa tươi vinamil socola', 5, 'vinamil', 8000.00, NULL, 'vinamisocola.jpg', 'bịch', 2),
-	(34, 'Sữa tươi TH True milk thùng', 5, 'th true milk thùng', 300000.00, 270000.00, 'ththung.jpg', 'thùng', 0),
+	(34, 'ST TH True milk thùng ', 5, 'th true milk thùng', 300000.00, 270000.00, 'ththung.jpg', 'thùng', 0),
 	(35, 'TH true milk', 5, 'vinamil', 10000.00, NULL, 'thtruemilk.jpg', 'hộp', 2),
 	(36, 'nutriboost', 5, 'nutriboost', 10000.00, NULL, 'nutriboost.jpg', 'chai', 1),
 	(37, 'nutriboost cam', 5, 'nutriboost cam', 10000.00, NULL, 'nutricam.jpg', 'chai', 0),
@@ -205,10 +205,12 @@ CREATE TABLE IF NOT EXISTS `users` (
   `auth_type` varchar(255) NOT NULL DEFAULT 'email',
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table laravel_drink.users: ~0 rows (approximately)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `nickname`, `avatar`, `auth_type`) VALUES
+	(1, 'tuấn nghĩa chu', 'nghia.bst3@gmail.com', NULL, '$2y$10$KgkAW4UBnmE0IvEfNl4u0./j/kGffA836dL480BeuFhLkzAJQTgtC', NULL, '2022-09-23 12:18:16', '2022-09-23 12:18:16', 'tuấn nghĩa chu', '', 'email');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

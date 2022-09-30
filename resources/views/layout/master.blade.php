@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Laravel_drink</title>
+	<title>@yield('title')</title>
     <base href="{{asset('')}}">
 	<link href='http://fonts.googleapis.com/css?family=Dosis:300,400' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
@@ -15,15 +15,12 @@
 	<link rel="stylesheet" title="style" href="./resources/source/assets/dest/css/style.css">
 	<link rel="stylesheet" href="./resources/source/assets/dest/css/animate.css">
 	<link rel="stylesheet" title="style" href="./resources/source/assets/dest/css/huong-style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
 <body>
 
 	@include('layout.header')
-	<div class="rev-slider">
-        @include('layout.slider')
-        			<!--slider-->
-	</div>
-	@yield('content')
+	<div style="padding:20px 0px;background-color:#EEEEEE">@yield('content')</div>
 	@include('layout.footer')
 
 	<!-- include js files -->
@@ -52,5 +49,6 @@
 		)
 	})
 	</script>
+    @yield('script')
 </body>
 </html>

@@ -53,7 +53,7 @@ class products extends Seeder
             ['name'=>'Sữa tươi vinamil','id_type'=>'5','description'=>'vinamil','unit_price'=>'8000','image'=>'vinamil.jpg','unit'=>'bịch','properties'=>'0'],
             ['name'=>'Sữa tươi vinamil dâu','id_type'=>'5','description'=>'vinamil','unit_price'=>'8000','image'=>'vinamildau.jpg','unit'=>'bịch','properties'=>'0'],
             ['name'=>'Sữa tươi vinamil socola','id_type'=>'5','description'=>'vinamil','unit_price'=>'8000','image'=>'vinamisocola.jpg','unit'=>'bịch','properties'=>'0'],
-            ['name'=>'Sữa tươi TH True milk thùng','id_type'=>'5','description'=>'th true milk thùng','unit_price'=>'300000','image'=>'ththung.jpg','unit'=>'thùng','properties'=>'0'],
+            ['name'=>'ST TH True milk','id_type'=>'5','description'=>'th true milk thùng','unit_price'=>'300000','image'=>'ththung.jpg','unit'=>'thùng','properties'=>'0'],
             ['name'=>'TH true milk','id_type'=>'5','description'=>'vinamil','unit_price'=>10000,'image'=>'thtruemilk.jpg','unit'=>'hộp','properties'=>'0'],
             ['name'=>'nutriboost','id_type'=>'5','description'=>'nutriboost','unit_price'=>10000,'image'=>'nutriboost.jpg','unit'=>'chai','properties'=>'1'],
             ['name'=>'nutriboost cam','id_type'=>'5','description'=>'nutriboost cam','unit_price'=>10000,'image'=>'nutricam.jpg','unit'=>'chai','properties'=>'0'],
